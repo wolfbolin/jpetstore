@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <header th:fragment="header">
+        <div id="Logo">
+            <div id="LogoContent">
+                <a href="/catalog/main"><img src="/images/logo-topbar.gif" /></a>
+            </div>
+        </div>
+
+        <div id="Menu">
+            <div id="MenuContent">
+                <a th:href="@{'/catalog/cart'}" >
+                    <img align="middle" name="img_cart" src="/images/cart.gif" />
+                </a>
+                <img align="middle" src="/images/separator.gif"  />
+                <a href="/account/SignonForm" th:if="${session.account==null}" th:text="#{SignIn}">Sign In</a>
+                <a href="/SignOut" th:if="${session.account!=null}">Sign Out</a>
+                <img align="middle" src="/images/separator.gif" />
+                <a th:href="@{/account/EditAccount?(username=${session.account.username})}" th:if="${session.account!=null}">My Account</a>
+                <img align="middle" src="/images/separator.gif" th:if="${session.account!=null}"/>
+                <a href="/help">?</a>
+
+                <img align="middle" src="/images/separator.gif" th:if="${lang1}"/>
+                <a href="/sign/language?lang=en_US" th:if="${lang1}" th:text="#{language_US}">英文</a>
+                <img align="middle" src="/images/separator.gif" th:if="${lang1}"/>
+                <a href="/sign/language?lang=zh_CN" th:if="${lang1}" th:text="#{language_CN}">中文</a>
+
+                <img align="middle" src="/images/separator.gif" th:if="${lang2}"/>
+                <a href="/new/language?lang=en_US" th:if="${lang2}" th:text="#{language_US}">英文</a>
+                <img align="middle" src="/images/separator.gif" th:if="${lang2}"/>
+                <a href="/new/language?lang=zh_CN" th:if="${lang2}" th:text="#{language_CN}">中文</a>
+            </div>
+        </div>
+
+        <div id="Search">
+            <div id="SearchContent">
+                <form action="#" th:action= "@{/searchProduct}" method="post">
+                    <input type="text" name="keyword" size="14" />
+                    <input type="submit" name="searchProducts" value="Search" />
+                </form>
+            </div>
+        </div>
+
+        <div id="QuickLinks">
+            <a href="/catalog/category?categoryId=FISH" th:text="#{fish}">
+                <img src="/images/sm_fish.gif" />
+            </a>
+            <img src="/images/separator.gif" />
+            <a href="/catalog/category?categoryId=DOGS" th:text="#{dogs}">
+                <img src="/images/sm_dogs.gif" />
+            </a>
+            <img src="/images/separator.gif" />
+            <a href="/catalog/category?categoryId=REPTILES" th:text="#{reptiles}">
+                <img src="/images/sm_reptiles.gif" />
+            </a>
+            <img src="/images/separator.gif" />
+            <a href="/catalog/category?categoryId=CATS" th:text="#{cats}">
+                <img src="/images/sm_cats.gif" />
+            </a>
+            <img src="/images/separator.gif" />
+            <a href="/catalog/category?categoryId=BIRDS" th:text="#{birds}">
+                <img src="/images/sm_birds.gif" />
+            </a>
+        </div>
+    </header>
+
+
+    <footer th:fragment="footer">
+        <div id="PoweredBy">
+            &nbsp<a href="www.csu.edu.cn">Central South University</a>
+        </div>
+
+        <div id="Banner">
+
+        </div>
+    </footer>
+</html>

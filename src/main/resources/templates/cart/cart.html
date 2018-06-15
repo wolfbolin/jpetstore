@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/template_head::head('workingItemId')">
+
+</head>
+<body>
+<header th:replace="common/template_menu::header">
+</header>
+
+<div id="Content">
+
+    <script type="text/javascript">
+        var xmlHttpRequest;
+        function createXMLHttpRequest()
+        {
+            if (window.XMLHttpRequest) //非IE浏览器
+            {
+                xmlHttpRequest = new XMLHttpRequest();
+            }
+            else if (window.ActiveObject)//IE6以上浏览器
+            {
+                xmlHttpRequest = new ActiveObject("Msxml2.XMLHTTP");
+            }
+            else //IE6及以下浏览器
+            {
+                xmlHttpRequest = new ActiveObject("Microsoft.XMLHTTP");
+            }
+        }
+
+        function total()
+        {
+            var quantity = document.cart.quantity.value-0;
+            var price = document.getElementById("price").innerText-0;
+            var sum=price*quantity;
+            var div1 = document.getElementById("total");
+            div1.innerHTML="￥"+ sum;
+        }
+
+        /*function total() {
+            var quantity = document.cart.quantity.value;
+        }*/
+
+    </script>
+
+    <div id="BackLink">
+        <a href="/catalog/main">Return to Main Menu</a>
+    </div>
+
+    <div id="Catalog">
+
+        <div id="Cart">
+
+            <h2>Shopping Cart</h2>
+            <form action="#" name="cart" th:action="@{/cart/updateCart}"  method="post">
+                <table>
+                    <tr>
+                        <th><b>Item ID</b></th>
+                        <th><b>Product ID</b></th>
+                        <th><b>Description</b></th>
+                        <th><b>In Stock?</b></th>
+                        <th><b>Quantity</b></th>
+                        <th><b>List Price</b></th>
+                        <th><b>Total Cost</b></th>
+                        <th>&nbsp;</th>
+                    </tr>
+
+
+                        <tr th:if="${cart.numberOfItems} == 0">
+                            <td colspan="8"><b>Your cart is empty.</b></td>
+                        </tr>
+
+                       <tr th:each="cartItem : ${cart.cartItemList}">
+                            <td>
+                                <a th:href="@{'/catalog/item?itemId='+${cartItem.item.itemId}+'&&productId='+${cartItem.item.product.productId}}" th:text="${cartItem.item.itemId}"></a>
+                            </td>
+                            <td th:text=" ${cartItem.item.product.productId}">
+                            </td>
+                            <td th:text="${cartItem.item.attribute1}+'   '+${cartItem.item.attribute2}+'  '+${cartItem.item.product.name}">
+                            </td>
+                            <td  th:text="${cartItem.inStock}"> </td>
+
+                            <td>
+                                <input type="text" name="quantity"  th:value="${cartItem.quantity}" onkeyup="total()"/>
+                            </td>
+                            <td id="price" th:text="${cartItem.item.listPrice}" > </td>
+                            <td th:text="'￥'+${cartItem.total}"  id="total"></td>
+                            <td>
+                                <a th:href="@{'/cart/removeCart?workingItemId='+${cartItem.item.itemId}}" class="Button">Remove</a>
+                            </td>
+                        </tr>
+
+                    <tr>
+                        <td colspan="7">
+                            <input type="submit" value="Update Cart"/>
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </form>
+
+
+                <a  th:if="${cart.numberOfItems }>0"  th:href="@{'/order/newOrderForm'}" class="Button">Proceed to Checkout</a>
+
+        </div>
+
+        <div id="Separator">&nbsp;</div>
+    </div>
+
+
+</div>
+
+<footer th:replace="common/template_menu::footer">
+
+</footer>
+</body>
+</html>

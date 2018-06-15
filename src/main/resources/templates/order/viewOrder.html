@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/template_head::head('MyPetStore shipping')">
+
+</head>
+<body>
+<header th:replace="common/template_menu::header">
+
+</header>
+
+<div id="Content">
+
+    <div id="BackLink">
+        <a href="/catalog/main">Return to Main Menu</a>
+    </div>
+
+    <ul class="messages">
+        <li>Thank you, your order has been submitted.</li>
+    </ul>
+    
+    <div id="Catalog">
+
+        <table>
+            <tr>
+                <th align="center" colspan="2" th:text="'Order #'+${neworder.orderId}+' '+${neworder.orderDate}">
+                  </th>
+            </tr>
+            <tr>
+                <th colspan="2">Payment Details</th>
+            </tr>
+            <tr>
+                <td>Card Type:</td>
+                <td th:text="${neworder.cardType}" ></td>
+            </tr>
+            <tr>
+                <td>Card Number:</td>
+                <td th:text="${neworder.creditCard}" > * Fake number!</td>
+            </tr>
+            <tr>
+                <td>Expiry Date (MM/YYYY):</td>
+                <td th:text="${neworder.expiryDate}" ></td>
+            </tr>
+            <tr>
+                <th colspan="2">Billing Address</th>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td th:text="${neworder.billToFirstName}" ></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td th:text="${neworder.billToLastName}" ></td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td th:text="${neworder.billAddress1}" ></td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td th:text="${neworder.billAddress2}" ></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td th:text="${neworder.billCity}" ></td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td th:text="${neworder.billState}" ></td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td th:text="${neworder.billZip}" ></td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td th:text="${neworder.billCountry}" ></td>
+            </tr>
+            <tr>
+                <th colspan="2">Shipping Address</th>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td th:text="${neworder.shipToFirstName}" ></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td th:text="${neworder.shipToLastName}" ></td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td th:text="${neworder.shipAddress1}" ></td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td th:text="${neworder.shipAddress2}" ></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td th:text="${neworder.shipCity}" ></td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td th:text="${neworder.shipState}" ></td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td th:text="${neworder.shipZip}" ></td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td th:text="${neworder.shipCountry}" ></td>
+            </tr>
+            <tr>
+                <td>Courier:</td>
+                <td th:text="${neworder.courier}" ></td>
+            </tr>
+            <tr>
+                <td colspan="2" th:text=" 'Status: '+ ${neworder.status}" ></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total Cost</th>
+                        </tr>
+                        <tr th:each="lineItem : ${neworder.lineItems}">
+                            <td>
+                                <a th:href="@{'/catalog/item?itemId='+${lineItem.item.itemId}+'&&productId='+${lineItem.item.product.productId}}" th:text="${lineItem.item.itemId}"></a>
+                            </td>
+                                <td th:if ="${lineItem.item != null}" th:text="${lineItem.item.attribute1}+'   '+${lineItem.item.attribute2}+'  '+${lineItem.item.product.name}">
+                                    <i th:if="${lineItem.item == null}">{description unavailable}</i>
+                                </td>
+
+                                <td th:text="${lineItem.quantity}">"</td>
+                                <td  th:text="'$'+${lineItem.unitPrice}" ></td>
+                                <td  th:text="'$'+${lineItem.quantity}*${lineItem.unitPrice}" ></td>
+                            </tr>
+
+                        <tr>
+                            <th colspan="5" th:text="'Total: $'+ ${neworder.totalPrice}"  ></th>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+
+<footer th:replace="common/template_menu::footer">
+
+</footer>
+</body>
+</html>

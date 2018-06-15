@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/template_head::head('Item')">
+
+</head>
+<body>
+<header th:replace="common/template_menu::header">
+
+</header>
+
+<div id="Content">
+
+    <div id="BackLink">
+        <a href="/catalog/main">Return to Product</a>
+    </div>
+
+    <div id="Catalog">
+
+        <table>
+            <tr>
+                <td th:utext="${item.product.description}"> <img src="/images/fish_icon.gif" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <b th:text="${item.itemId}"> </b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b th:text="|${item.attribute1} ${item.product.name}|">
+                        <font size="4">
+                        </font>
+                    </b>
+                </td>
+            </tr>
+            <tr>
+                <td th:text="${item.product.name}"></td>
+            </tr>
+            <tr>
+                <td>
+                    Back ordered.
+                </td>
+            </tr>
+            <tr>
+                <td th:text="${item.listPrice}">
+                    ${sessionScope.item.listPrice}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a class="Button" th:href="@{/cart/cart?(workingItemId=${item.itemId})}">Add to Cart</a>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+
+</div>
+
+<footer th:replace="common/template_menu::footer">
+
+</footer>
+</body>
+</html>

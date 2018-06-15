@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/template_head::head('SigIn')">
+
+</head>
+<body>
+<header th:replace="common/template_menu::header">
+
+</header>
+
+<div id="Content">
+
+    <script>
+        function reloadImage() {
+            document.getElementById("image").src = '/createImage?'+(new Date()).getTime();
+        }
+    </script>
+
+
+    <div id="Catalog">
+
+        <form action="/Sign"  method="post">
+            <p th:text="#{please}">Please enter your username and password.</p>
+
+            <p>
+                [[#{username}]]<input type="text" name="username"  /><br />
+                [[#{password}]]<input type="password" name="password" /><br />
+                [[#{ValidationCode}]]<input id="checkcode" name="checkcode" type="text" /><br/><br/>
+            <!--<td><img src="/createImage" id="image" title="点击更换" onclick="this.src='/createImage?'+(new Date()).getTime();"/></td>-->
+            <td><img src="/createImage" id="image"  onclick="reloadImage()"/></td>
+            <td><span id="checkcode_msg" class="required"></span></td><br/>
+
+            <input type="submit" name="signon" value="Login" th:value="#{login}" />
+            </p>
+
+        </form>
+        [[#{need}]]<a href="/NewAccount" th:text="#{register}">Register Now!</a>
+
+    </div>
+
+</div>
+
+<footer th:replace="common/template_menu::footer">
+
+</footer>
+</body>
+</html>

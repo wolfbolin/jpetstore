@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/template_head::head('MyPetStore comfirm')">
+
+</head>
+<body>
+<header th:replace="common/template_menu::header">
+
+</header>
+
+<div id="Content">
+
+    <div id="BackLink">
+        <a href="/catalog/main">Return to Main Menu</a>
+    </div>
+
+
+    <div id="Catalog">
+        Please confirm the information below and then press continue...
+
+        <table>
+            <tr>
+                <th align="center" colspan="2"><font size="4"><b>Order</b></font>
+                    <br />
+                    <font size="3"><b th:value="${neworder.orderDate}">
+                      </b></font>
+                </th>
+            </tr>
+
+            <tr>
+                <th colspan="2">Billing Address</th>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td th:text="${neworder.billToFirstName}"></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td th:text="${neworder.billToLastName}"></td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td th:text="${neworder.billAddress1}"></td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td th:text="${neworder.billAddress2}" ></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td th:text="${neworder.billCity}"></td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td th:text="${neworder.billState}" ></td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td th:text="${neworder.billZip}" ></td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td th:text="${neworder.billCountry}" ></td>
+            </tr>
+            <tr>
+                <th colspan="2">Shipping Address</th>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td th:text="${neworder.shipToFirstName}" ></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td th:text="${neworder.shipToLastName}" ></td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td th:text="${neworder.shipAddress1}" ></td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td th:text="${neworder.shipAddress2}" ></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td th:text="${neworder.shipCity}" ></td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td th:text="${neworder.shipState}" ></td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td  th:text="${neworder.shipZip}" ></td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td th:text="${neworder.shipCountry}" ></td>
+            </tr>
+
+        </table>
+
+        <a class="Button" href="/order/viewOrder">Confirm</a>
+</div>
+
+<footer th:replace="common/template_menu::footer">
+
+</footer>
+</body>
+</html>
